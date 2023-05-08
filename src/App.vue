@@ -1,12 +1,36 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
+    <van-button type="primary">主要按钮</van-button>
+    <van-button type="info">信息按钮</van-button>
+    <van-button type="default">默认按钮</van-button>
+    <van-button type="warning">警告按钮</van-button>
+    <van-button type="danger">危险按钮</van-button>
     <router-view/>
   </div>
 </template>
+
+<script>
+import request from '@/utils/request'
+
+export default {
+  created () {
+  // 可以获取到数据和方法，但是可以获取到dom吗
+  },
+  async mounted () {
+  // 可以获取到真实的dom
+  // 测试一下登录接口能不能用
+    const res = await request({
+      method: 'POST',
+      url: '/user/login',
+      data: {
+        password: '123456',
+        username: 'wuxiaohui'
+      }
+    })
+    console.log(res)
+  }
+}
+</script>
 
 <style lang="less">
 #app {
