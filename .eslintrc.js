@@ -11,6 +11,14 @@ module.exports = {
     parser: '@babel/eslint-parser'
   },
   rules: {
+    'vue/max-attributes-per-line': ['error', {
+      singleline: {
+        max: 1
+      },
+      multiline: {
+        max: 1
+      }
+    }],
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'vue/html-indent': ['error', 2, {

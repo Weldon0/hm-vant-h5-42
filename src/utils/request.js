@@ -9,6 +9,8 @@ const request = axios.create({
 
 // 请求拦截器: 一般情况下做的就是token的统一注入
 request.interceptors.request.use((config) => {
+  // config是什么，请求的配置
+  // console.log(config)
   // 请求之前可以进行通用的配置
   // config return回去
   return config
@@ -20,7 +22,9 @@ request.interceptors.request.use((config) => {
 
 request.interceptors.response.use((response) => {
 //   接口拿到数据之后，如果想要进行一些通用的逻辑处理，可以放在响应拦截器
-  return response
+  console.log(response) // 响应回来的数据
+  //
+  return response.data
 }, err => {
 //   什么时候触发
 //   除了200以外的状态码的时候就会走错误处理
