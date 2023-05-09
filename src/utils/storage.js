@@ -1,7 +1,10 @@
 // 封装一些快速操作本地存储的方法，方便调用
 const KEY = 'my-token-vant-mobile' // 设置本地存储的键名
 
-// 1、获取token的方法
+/**
+ * 获取本地存储token
+ * @returns {string}
+ */
 export function getToken () {
   return localStorage.getItem(KEY)
 }

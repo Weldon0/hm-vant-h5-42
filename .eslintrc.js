@@ -11,6 +11,12 @@ module.exports = {
     parser: '@babel/eslint-parser'
   },
   rules: {
+    'vue/singleline-html-element-content-newline': 'off',
+    'vue/multiline-html-element-content-newline': 'off',
+    'vue/first-attribute-linebreak': ['error', {
+      singleline: 'ignore',
+      multiline: 'below'
+    }],
     'vue/max-attributes-per-line': ['error', {
       singleline: {
         max: 1

@@ -1,6 +1,7 @@
 // axios的配置
 import axios from 'axios'
-
+import { Toast } from 'vant'
+// import { Toast } from 'vant'
 // 创建一个axios实例，集成进去一个baseUrl,集成一个timeout超时时间
 const request = axios.create({
   baseURL: 'http://interview-api-t.itheima.net/h5/',
@@ -26,11 +27,20 @@ request.interceptors.response.use((response) => {
   //
   return response.data
 }, err => {
-//   什么时候触发
-//   除了200以外的状态码的时候就会走错误处理
+// 什么时候触发
+// 除了200以外的状态码的时候就会走错误处理
+// 怎么处理？
+  Toast(err?.response?.data?.message || '系统出错，请联系管理员')
   return Promise.reject(err)
 })
 // 默认导出
-
 // 导出之后其他地方才能使用我们配置好的request进行请求
 export default request
+
+// const obj = {}
+//
+// // 可选链运算符
+// // 如果某一个属性不存在，原地返回undefined,而不会报错
+// if (obj?.message?.name?.age) {
+//   console.log(obj.message.name.age)
+// }
