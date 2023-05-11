@@ -5,9 +5,11 @@
 </template>
 
 <script>
+// 父子组件嵌套的声明周期
+// 防抖节流、场景、区别是什么？
 export default {
   created () {
-  // 可以获取到数据和方法，但是可以获取到dom吗
+    // 可以获取到数据和方法，但是可以获取到dom吗
   },
   data () {
     return {

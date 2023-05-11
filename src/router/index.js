@@ -86,4 +86,4 @@ router.beforeEach((to, from, next) => {
   }
 })
 
-export default router
+export default router // 对象的身上是有push方法的，用于路由跳转

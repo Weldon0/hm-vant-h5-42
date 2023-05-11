@@ -1,6 +1,8 @@
 // axios的配置
 import axios from 'axios'
 import { Toast } from 'vant'
+import { delToken, getToken } from '@/utils/storage'
+import router from '@/router'
 // import { Toast } from 'vant'
 // 创建一个axios实例，集成进去一个baseUrl,集成一个timeout超时时间
 const request = axios.create({
@@ -14,6 +16,12 @@ request.interceptors.request.use((config) => {
   // console.log(config)
   // 请求之前可以进行通用的配置
   // config return回去
+  // token注入的操作
+  const token = getToken() // 从本地存储获取token
+  // 判断token是否存在，如果存在的情况下，注入到请求头里面
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
   return config
 }, (err) => {
   return Promise.reject(err)
@@ -23,13 +31,23 @@ request.interceptors.request.use((config) => {
 
 request.interceptors.response.use((response) => {
 //   接口拿到数据之后，如果想要进行一些通用的逻辑处理，可以放在响应拦截器
-  console.log(response) // 响应回来的数据
+//   console.log(response) // 响应回来的数据
   //
   return response.data
 }, err => {
 // 什么时候触发
 // 除了200以外的状态码的时候就会走错误处理
 // 怎么处理？
+
+  // 进行token失效的处理
+  // 判断是不是token失效的错误信息
+  if (err.response.status === 401) {
+  //   token失效了
+  //   删除token
+    delToken()
+    // 跳转登录页面
+    router.push('/login')
+  }
   Toast(err?.response?.data?.message || '系统出错，请联系管理员')
   return Promise.reject(err)
 })
